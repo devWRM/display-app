@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  cleaning: one
+  dated: 2021-05-27 09:47:36
+  original: false
+
+two:
+  user: two
+  cleaning: two
+  dated: 2021-05-27 09:47:36
+  original: false
