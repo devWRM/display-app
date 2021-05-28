@@ -6,8 +6,56 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# require 'faker'
+
+Schedule.destroy_all    #NOTE Had to list Schedule first due to re-seeding error
+                        #NOTE Theory: Had to destroy dependent connections 1st but WHY?
+                        #NOTE Reason: Because when User listed 1st & destroyed, instant auto error in Schedule
 User.destroy_all
+Cleaning.destroy_all
 
 # abe = User.create(name: 'Abraham', email: 'abe@email.com', password: 'abe')
 
-users = User.create([{name: "Abraham", email: "abe@email.com", password: "abe"}, {name: "Beatrice", email: "bea@email.com", password: "bea"}, {name: "Cecelia", email: "cc@email.com", password: "cc"}])
+
+users = User.create([{name: "Abraham", email: "abe@email.com", password: Faker::Name.unique.initials(number: 4)}, {name: "Beatrice", email: "bea@email.com", password: Faker::Name.unique.initials(number: 4)}, {name: "Cecelia", email: "cc@email.com", password: Faker::Name.unique.initials(number: 4)}])
+
+cleanings = Cleaning.create([{action: "wash windows"}, {action: "sweep floors"}, {action: "dust furniture"}])
+
+# puts "This works now: #{users[0].id} and #{cleanings.first.id}"
+
+Schedule.create(user_id: users[0].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true)
+Schedule.create(user_id: users[1].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false)
+Schedule.create(user_id: users[2].id, cleaning_id: cleanings[1].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true)
+Schedule.create(user_id: users[2].id, cleaning_id: cleanings[2].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true)
+
+
+
+
+#######################################
+
+
+# users = User.create([{name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Name.unique.initials(number: 4)}, {name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Name.unique.initials(number: 4)}, {name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Name.unique.initials(number: 4)}])
+
+# cleanings = Cleaning.create([{action: "wash windows"}, {action: "sweep floors"}, {action: "dust furniture"}])
+
+# Schedule.create(user_id: users[0].id, cleaning_id: cleanings.first.id, dated: "2021-01-27 14:51:58", original: true)
+# Schedule.create(user_id: users[1].id, cleaning_id: cleanings.first.id, dated: Faker::Date.between(from: '2021-01-10', to: '2021-04-20'), original: false)
+
+##########################################
+
+# users = User.create([{name: "Abraham", email: abe@email.com, password: Faker::Name.unique.initials(number: 4)}, {name: "Beatrice", email: bea@email.com, password: Faker::Name.unique.initials(number: 4)}, {name: Cecelia, email: cc@email.com, password: Faker::Name.unique.initials(number: 4)}])
+
+
+
+
+# 5.times do   
+#     users = User.create(name: Faker::Name.unique.name, email: Faker::Internet.unique.email, password: Faker::Name.unique.initials(number: 4))
+#     puts "#{users[x].id}""
+#     x=x+1;
+# end
+
+
+
+
+
+
