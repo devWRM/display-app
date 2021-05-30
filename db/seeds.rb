@@ -13,11 +13,17 @@ Schedule.destroy_all    #NOTE Had to list Schedule first due to re-seeding error
                         #NOTE Reason: Because when User listed 1st & destroyed, instant auto error in Schedule
 User.destroy_all
 Cleaning.destroy_all
+Status.destroy_all
 
 # abe = User.create(name: 'Abraham', email: 'abe@email.com', password: 'abe')
 
+stats = Status.create([{active: true}, {active: false}, {active: true}])
 
-users = User.create([{name: "Abraham", email: "abe@email.com", password: Faker::Name.unique.initials(number: 4)}, {name: "Beatrice", email: "bea@email.com", password: Faker::Name.unique.initials(number: 4)}, {name: "Cecelia", email: "cc@email.com", password: Faker::Name.unique.initials(number: 4)}])
+users = User.create([
+    {name: "Abraham", email: "abe@email.com", password: Faker::Name.unique.initials(number: 4), status_id: stats[0].id}, 
+    {name: "Beatrice", email: "bea@email.com", password: Faker::Name.unique.initials(number: 4), status_id: stats[1].id}, 
+    {name: "Cecelia", email: "cc@email.com", password: Faker::Name.unique.initials(number: 4), status_id: stats[2].id}
+])
 
 cleanings = Cleaning.create([{action: "wash windows"}, {action: "sweep floors"}, {action: "dust furniture"}])
 
