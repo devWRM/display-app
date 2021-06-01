@@ -10,13 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_30_030001) do
+ActiveRecord::Schema.define(version: 2021_06_01_032135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cleanings", force: :cascade do |t|
     t.string "action"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -28,7 +34,9 @@ ActiveRecord::Schema.define(version: 2021_05_30_030001) do
     t.boolean "original"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "room_id", null: false
     t.index ["cleaning_id"], name: "index_schedules_on_cleaning_id"
+    t.index ["room_id"], name: "index_schedules_on_room_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
@@ -49,6 +57,7 @@ ActiveRecord::Schema.define(version: 2021_05_30_030001) do
   end
 
   add_foreign_key "schedules", "cleanings"
+  add_foreign_key "schedules", "rooms"
   add_foreign_key "schedules", "users"
   add_foreign_key "users", "statuses"
 end
