@@ -31,13 +31,15 @@ cleanings = Cleaning.create([{action: "wash windows"}, {action: "sweep floors"},
 
 # puts "This works now: #{users[0].id} and #{cleanings.first.id}"
 
-Schedule.create(user_id: users[0].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true)
-Schedule.create(user_id: users[1].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false)
-Schedule.create(user_id: users[2].id, cleaning_id: cleanings[1].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true)
-Schedule.create(user_id: users[2].id, cleaning_id: cleanings[2].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true)
-Schedule.create(user_id: users[2].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false)
-Schedule.create(user_id: users[2].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false)
-Schedule.create(user_id: users[2].id, cleaning_id: cleanings[1].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false)
+rooms = Room.create([{name: "Sun Room"}, {name: "Basement"}])
+
+Schedule.create(user_id: users[0].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[0].id)
+Schedule.create(user_id: users[1].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[0].id)
+Schedule.create(user_id: users[2].id, cleaning_id: cleanings[1].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[1].id)
+Schedule.create(user_id: users[2].id, cleaning_id: cleanings[2].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[1].id)
+Schedule.create(user_id: users[2].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[0].id)
+Schedule.create(user_id: users[2].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[1].id)
+Schedule.create(user_id: users[2].id, cleaning_id: cleanings[1].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[1].id)
 
 
 
