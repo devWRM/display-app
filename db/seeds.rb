@@ -12,8 +12,9 @@ Schedule.destroy_all    #NOTE Had to list Schedule first due to re-seeding error
                         #NOTE Theory: Had to destroy dependent connections 1st but WHY?
                         #NOTE Reason: Because when User listed 1st & destroyed, instant auto error in Schedule
 User.destroy_all
-Cleaning.destroy_all
 Status.destroy_all
+Cleaning.destroy_all
+Room.destroy_all
 
 # abe = User.create(name: 'Abraham', email: 'abe@email.com', password: 'abe')
 
