@@ -25,6 +25,7 @@ users = User.create([
     {name: "Cecelia", email: "cc@email.com", password: Faker::Name.unique.initials(number: 4), status_id: stats[2].id}
 ])
 
+
 cleanings = Cleaning.create([{action: "wash windows"}, {action: "sweep floors"}, {action: "dust furniture"}])
 
 # puts "This works now: #{users[0].id} and #{cleanings.first.id}"
@@ -53,17 +54,31 @@ Schedule.create(user_id: users[2].id, cleaning_id: cleanings[1].id, dated: Faker
 
 # users = User.create([{name: "Abraham", email: abe@email.com, password: Faker::Name.unique.initials(number: 4)}, {name: "Beatrice", email: bea@email.com, password: Faker::Name.unique.initials(number: 4)}, {name: Cecelia, email: cc@email.com, password: Faker::Name.unique.initials(number: 4)}])
 
-
-
-
 # 5.times do   
 #     users = User.create(name: Faker::Name.unique.name, email: Faker::Internet.unique.email, password: Faker::Name.unique.initials(number: 4))
 #     puts "#{users[x].id}""
 #     x=x+1;
 # end
 
+##################################################
 
+# stats = Status.create([{active: true}, {active: false}, {active: true}])
 
+# users = User.create([
+#     {name: "Abraham", email: "abe@email.com", password: Faker::Name.unique.initials(number: 4), status_id: stats[-1].id}, 
+#     {name: "Beatrice", email: "bea@email.com", password: Faker::Name.unique.initials(number: 4), status_id: stats[0].id}, 
+#     {name: "Cecelia", email: "cc@email.com", password: Faker::Name.unique.initials(number: 4), status_id: stats[1].id}
+# ])
 
+##################################################
 
+# stat1 = Status.create(active: true)
+# stat2 = Status.create(active: false)
+# stat3 = Status.create(active: true)
+
+# users = User.create([
+#     {name: "Abraham", email: "abe@email.com", password: Faker::Name.unique.initials(number: 4), status_id: stat1.id}, 
+#     {name: "Beatrice", email: "bea@email.com", password: Faker::Name.unique.initials(number: 4), status_id: stat2.id}, 
+#     {name: "Cecelia", email: "cc@email.com", password: Faker::Name.unique.initials(number: 4), status_id: stat3.id}
+# ])
 
