@@ -12,18 +12,17 @@ Schedule.destroy_all    #NOTE Had to list Schedule first due to re-seeding error
                         #NOTE Theory: Had to destroy dependent connections 1st but WHY?
                         #NOTE Reason: Because when User listed 1st & destroyed, instant auto error in Schedule
 User.destroy_all
-Status.destroy_all
+# Status.destroy_all
 Cleaning.destroy_all
 Room.destroy_all
 
 # abe = User.create(name: 'Abraham', email: 'abe@email.com', password: 'abe')
 
-stats = Status.create([{active: true}, {active: false}, {active: true}])
 
 users = User.create([
-    {name: "Abraham", email: "abe@email.com", password: Faker::Name.unique.initials(number: 4), status_id: stats[0].id}, 
-    {name: "Beatrice", email: "bea@email.com", password: Faker::Name.unique.initials(number: 4), status_id: stats[1].id}, 
-    {name: "Cecelia", email: "cc@email.com", password: Faker::Name.unique.initials(number: 4), status_id: stats[2].id}
+    {name: "Abraham", email: "abe@email.com", password: Faker::Name.unique.initials(number: 4)}, 
+    {name: "Beatrice", email: "bea@email.com", password: Faker::Name.unique.initials(number: 4)}, 
+    {name: "Cecelia", email: "cc@email.com", password: Faker::Name.unique.initials(number: 4)}
 ])
 
 
@@ -65,6 +64,7 @@ Schedule.create(user_id: users[2].id, cleaning_id: cleanings[1].id, dated: Faker
 
 ##################################################
 
+# NOTE Status table & User's status_id foreign key ALL DELETED
 # stats = Status.create([{active: true}, {active: false}, {active: true}])
 
 # users = User.create([
@@ -75,6 +75,7 @@ Schedule.create(user_id: users[2].id, cleaning_id: cleanings[1].id, dated: Faker
 
 ##################################################
 
+# NOTE Status table & User's status_id foreign key ALL DELETED
 # stat1 = Status.create(active: true)
 # stat2 = Status.create(active: false)
 # stat3 = Status.create(active: true)
