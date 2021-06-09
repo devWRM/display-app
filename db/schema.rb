@@ -40,24 +40,15 @@ ActiveRecord::Schema.define(version: 2021_06_01_032135) do
     t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
-  create_table "statuses", force: :cascade do |t|
-    t.boolean "active"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "status_id", null: false
-    t.index ["status_id"], name: "index_users_on_status_id"
   end
 
   add_foreign_key "schedules", "cleanings"
   add_foreign_key "schedules", "rooms"
   add_foreign_key "schedules", "users"
-  add_foreign_key "users", "statuses"
 end
