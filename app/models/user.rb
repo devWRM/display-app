@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    belongs_to :status
+    # belongs_to :status
 
     has_many :schedules
     has_many :cleanings, through: :schedules
