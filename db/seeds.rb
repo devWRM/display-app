@@ -20,9 +20,9 @@ Room.destroy_all
 
 
 users = User.create([
-    {name: "Abraham", email: "abe@email.com", password: Faker::Name.unique.initials(number: 4)}, 
-    {name: "Beatrice", email: "bea@email.com", password: Faker::Name.unique.initials(number: 4)}, 
-    {name: "Cecelia", email: "cc@email.com", password: Faker::Name.unique.initials(number: 4)}
+    {name: "Abraham", email: "abe@email.com", password: Faker::Name.unique.initials(number: 4), active: true}, 
+    {name: "Beatrice", email: "bea@email.com", password: Faker::Name.unique.initials(number: 4), active: true}, 
+    {name: "Cecelia", email: "cc@email.com", password: Faker::Name.unique.initials(number: 4), active: true}
 ])
 
 
