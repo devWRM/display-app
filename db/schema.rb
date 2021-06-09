@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_01_032135) do
+ActiveRecord::Schema.define(version: 2021_06_09_014238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,12 +19,14 @@ ActiveRecord::Schema.define(version: 2021_06_01_032135) do
     t.string "action"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "active", default: true
   end
 
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "active", default: true
   end
 
   create_table "schedules", force: :cascade do |t|
@@ -35,6 +37,8 @@ ActiveRecord::Schema.define(version: 2021_06_01_032135) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "room_id", null: false
+    t.boolean "active", default: true
+    t.boolean "pass"
     t.index ["cleaning_id"], name: "index_schedules_on_cleaning_id"
     t.index ["room_id"], name: "index_schedules_on_room_id"
     t.index ["user_id"], name: "index_schedules_on_user_id"
@@ -46,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_06_01_032135) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "active", default: true
   end
 
   add_foreign_key "schedules", "cleanings"
