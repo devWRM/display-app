@@ -46,6 +46,6 @@ class SchedulesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def schedule_params
-      params.require(:schedule).permit(:user_id, :cleaning_id, :dated, :original)
+      params.require(:schedule).permit(:user_id, :type_id, :room_id, :dated, :original, :isActive)
     end
 end
