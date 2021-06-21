@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :assignments
+  resources :types
   resources :rooms
   resources :schedules
 
