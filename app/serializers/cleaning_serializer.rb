@@ -1,3 +1,3 @@
 class CleaningSerializer < ActiveModel::Serializer
-  attributes :id, :duty, :isActive
+  attributes :id, :duty, :pass, :isActive
 end
