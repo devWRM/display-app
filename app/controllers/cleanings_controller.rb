@@ -46,6 +46,6 @@ class CleaningsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def cleaning_params
-      params.require(:cleaning).permit(:action)
+      params.require(:cleaning).permit(:duty, :pass, :isActive)
     end
 end
