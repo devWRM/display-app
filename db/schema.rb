@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_06_27_134736) do
   create_table "assignments", force: :cascade do |t|
     t.bigint "type_id", null: false
     t.bigint "cleaning_id", null: false
-    t.boolean "isActive"
+    t.boolean "isActive", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cleaning_id"], name: "index_assignments_on_cleaning_id"
