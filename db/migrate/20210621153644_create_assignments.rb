@@ -3,7 +3,7 @@ class CreateAssignments < ActiveRecord::Migration[6.0]
     create_table :assignments do |t|
       t.references :type, null: false, foreign_key: true
       t.references :cleaning, null: false, foreign_key: true
-      t.boolean :isActive
+      t.boolean :isActive, default: true
 
       t.timestamps
     end
