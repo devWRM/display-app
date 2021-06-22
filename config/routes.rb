@@ -1,20 +1,21 @@
 Rails.application.routes.draw do
-  resources :assignments
-  resources :types
-  resources :rooms
-  resources :schedules
-
-  resources :statuses do
-    resources :users
-  end
-
-
-  resources :cleanings do
-    resources :schedules
-  end
-
+  
   resources :users do
     resources :schedules
+  end
+
+  resources :rooms do
+    resources :schedules
+  end
+
+
+  resources :types do
+    resources :schedules
+    resources :assignments
+  end
+
+  resources :cleanings do
+    resources :assignments
   end
 
   
