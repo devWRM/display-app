@@ -8,43 +8,87 @@
 
 # require 'faker'
 
+Assignment.destroy_all
 Schedule.destroy_all    #NOTE Had to list Schedule first due to re-seeding error
                         #NOTE Theory: Had to destroy dependent connections 1st but WHY?
                         #NOTE Reason: Because when User listed 1st & destroyed, instant auto error in Schedule
 User.destroy_all
-# Status.destroy_all
-Cleaning.destroy_all
 Room.destroy_all
+Type.destroy_all
+Cleaning.destroy_all
+# Status.destroy_all
 
 # abe = User.create(name: 'Abraham', email: 'abe@email.com', password: 'abe')
 
 
 users = User.create([
-    {name: "Abraham", email: "abe@email.com", password: Faker::Name.unique.initials(number: 4), active: true}, 
-    {name: "Beatrice", email: "bea@email.com", password: Faker::Name.unique.initials(number: 4), active: true}, 
-    {name: "Cecelia", email: "cc@email.com", password: Faker::Name.unique.initials(number: 4), active: false}, 
-    {name: "DeAnna", email: "dee@email.com", password: Faker::Name.unique.initials(number: 4), active: true}, 
-    {name: "Elise", email: "eel@email.com", password: Faker::Name.unique.initials(number: 4), active: true}
+    {name: "Abraham", email: "abe@email.com", password: Faker::Name.unique.initials(number: 4)}, 
+    {name: "Beatrice", email: "bea@email.com", password: Faker::Name.unique.initials(number: 4)}, 
+    {name: "Cecelia", email: "cc@email.com", password: Faker::Name.unique.initials(number: 4), isActive: false}, 
+    {name: "DeAnna", email: "dee@email.com", password: Faker::Name.unique.initials(number: 4)}, 
+    {name: "Elise", email: "eel@email.com", password: Faker::Name.unique.initials(number: 4)}
 ])
 
+rooms = Room.create([{name: "home office"}, {name: "attic"}, {name: "bathroom"}])
 
-cleanings = Cleaning.create([{action: "wash windows"}, {action: "sweep floors"}, {action: "dust furniture"}])
+types = Type.create([{name: "major"}, {name: "minor"}, {name: "all"}])
+
+cleanings = Cleaning.create([{duty: "windows washed"}, {duty: "floors swept"}, {duty: "furniture dusted"}, {duty: "trash emptied"}, {duty: "supplies replenished"}])
+
+schedules = 
+
+Schedule.create(user_id: users[0].id, type_id: types[2].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[0].id)
+Schedule.create(user_id: users[0].id, type_id: types[0].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[0].id)
+Schedule.create(user_id: users[1].id, type_id: types[0].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[1].id)
+Schedule.create(user_id: users[3].id, type_id: types[0].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[1].id)
+Schedule.create(user_id: users[3].id, type_id: types[1].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[1].id)
+Schedule.create(user_id: users[0].id, type_id: types[0].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[0].id)
+Schedule.create(user_id: users[1].id, type_id: types[1].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[1].id)
+Schedule.create(user_id: users[3].id, type_id: types[2].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[2].id)
+
+Assignment.create(type_id: types[2], cleaning_id: cleanings[0])
+Assignment.create(type_id: types[2], cleaning_id: cleanings[1])
+Assignment.create(type_id: types[2], cleaning_id: cleanings[2])
+Assignment.create(type_id: types[2], cleaning_id: cleanings[3])
+Assignment.create(type_id: types[2], cleaning_id: cleanings[4])
+
+Assignment.create(type_id: types[1], cleaning_id: cleanings[0])
+Assignment.create(type_id: types[0], cleaning_id: cleanings[1])
+Assignment.create(type_id: types[0], cleaning_id: cleanings[2])
+Assignment.create(type_id: types[0], cleaning_id: cleanings[3])
+Assignment.create(type_id: types[0], cleaning_id: cleanings[4])
+
+
+
+
+####################################### ORIGINAL BEGIN
+
+# users = User.create([
+#     {name: "Abraham", email: "abe@email.com", password: Faker::Name.unique.initials(number: 4), active: true}, 
+#     {name: "Beatrice", email: "bea@email.com", password: Faker::Name.unique.initials(number: 4), active: true}, 
+#     {name: "Cecelia", email: "cc@email.com", password: Faker::Name.unique.initials(number: 4), active: false}, 
+#     {name: "DeAnna", email: "dee@email.com", password: Faker::Name.unique.initials(number: 4), active: true}, 
+#     {name: "Elise", email: "eel@email.com", password: Faker::Name.unique.initials(number: 4), active: true}
+# ])
+
+
+# cleanings = Cleaning.create([{action: "wash windows"}, {action: "sweep floors"}, {action: "dust furniture"}])
 
 # puts "This works now: #{users[0].id} and #{cleanings.first.id}"
 
-rooms = Room.create([{name: "Sun Room"}, {name: "Basement"}])
+# rooms = Room.create([{name: "Sun Room"}, {name: "Basement"}])
 
-Schedule.create(user_id: users[0].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[0].id, pass: false)
-Schedule.create(user_id: users[1].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[0].id, pass: false)
-Schedule.create(user_id: users[3].id, cleaning_id: cleanings[1].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[1].id, pass: false)
-Schedule.create(user_id: users[3].id, cleaning_id: cleanings[2].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[1].id, pass: true)
-Schedule.create(user_id: users[3].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[0].id, pass: true)
-Schedule.create(user_id: users[3].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[1].id, pass: true)
-Schedule.create(user_id: users[3].id, cleaning_id: cleanings[1].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[1].id, pass: false)
+# Schedule.create(user_id: users[0].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[0].id, pass: false)
+# Schedule.create(user_id: users[1].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[0].id, pass: false)
+# Schedule.create(user_id: users[3].id, cleaning_id: cleanings[1].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[1].id, pass: false)
+# Schedule.create(user_id: users[3].id, cleaning_id: cleanings[2].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[1].id, pass: true)
+# Schedule.create(user_id: users[3].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[0].id, pass: true)
+# Schedule.create(user_id: users[3].id, cleaning_id: cleanings.first.id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[1].id, pass: true)
+# Schedule.create(user_id: users[3].id, cleaning_id: cleanings[1].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[1].id, pass: false)
 
 
 
-#######################################
+####################################### ORIGINAL END
 
 
 # users = User.create([{name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Name.unique.initials(number: 4)}, {name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Name.unique.initials(number: 4)}, {name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Name.unique.initials(number: 4)}])
