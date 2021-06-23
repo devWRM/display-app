@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # resources :assignments
   
   resources :users do
     resources :schedules
@@ -8,10 +9,12 @@ Rails.application.routes.draw do
     resources :schedules
   end
 
+  resources :types do
+    resources :assignments
+  end
 
   resources :types do
     resources :schedules
-    resources :assignments
   end
 
   resources :cleanings do

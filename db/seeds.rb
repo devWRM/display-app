@@ -35,7 +35,17 @@ types = Type.create([{name: "major"}, {name: "minor"}, {name: "all"}])
 
 cleanings = Cleaning.create([{duty: "windows washed"}, {duty: "floors swept"}, {duty: "furniture dusted"}, {duty: "trash emptied"}, {duty: "supplies replenished"}])
 
-schedules = 
+Assignment.create(type_id: types[2].id, cleaning_id: cleanings[0].id)
+Assignment.create(type_id: types[2].id, cleaning_id: cleanings[1].id)
+Assignment.create(type_id: types[2].id, cleaning_id: cleanings[2].id)
+Assignment.create(type_id: types[2].id, cleaning_id: cleanings[3].id)
+Assignment.create(type_id: types[2].id, cleaning_id: cleanings[4].id)
+
+Assignment.create(type_id: types[1].id, cleaning_id: cleanings[0].id)
+Assignment.create(type_id: types[0].id, cleaning_id: cleanings[1].id)
+Assignment.create(type_id: types[0].id, cleaning_id: cleanings[2].id)
+Assignment.create(type_id: types[0].id, cleaning_id: cleanings[3].id)
+Assignment.create(type_id: types[0].id, cleaning_id: cleanings[4].id)
 
 Schedule.create(user_id: users[0].id, type_id: types[2].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[0].id)
 Schedule.create(user_id: users[0].id, type_id: types[0].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[0].id)
@@ -45,19 +55,6 @@ Schedule.create(user_id: users[3].id, type_id: types[1].id, dated: Faker::Date.u
 Schedule.create(user_id: users[0].id, type_id: types[0].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[0].id)
 Schedule.create(user_id: users[1].id, type_id: types[1].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[1].id)
 Schedule.create(user_id: users[3].id, type_id: types[2].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[2].id)
-
-Assignment.create(type_id: types[2], cleaning_id: cleanings[0])
-Assignment.create(type_id: types[2], cleaning_id: cleanings[1])
-Assignment.create(type_id: types[2], cleaning_id: cleanings[2])
-Assignment.create(type_id: types[2], cleaning_id: cleanings[3])
-Assignment.create(type_id: types[2], cleaning_id: cleanings[4])
-
-Assignment.create(type_id: types[1], cleaning_id: cleanings[0])
-Assignment.create(type_id: types[0], cleaning_id: cleanings[1])
-Assignment.create(type_id: types[0], cleaning_id: cleanings[2])
-Assignment.create(type_id: types[0], cleaning_id: cleanings[3])
-Assignment.create(type_id: types[0], cleaning_id: cleanings[4])
-
 
 
 
