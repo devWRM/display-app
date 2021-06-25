@@ -29,23 +29,34 @@ users = User.create([
     {name: "Elise", email: "eel@email.com", password: Faker::Name.unique.initials(number: 4)}
 ])
 
-rooms = Room.create([{name: "home office"}, {name: "attic"}, {name: "bathroom"}])
+rooms = Room.create([{name: "main office"}, {name: "attic"}, {name: "bathroom"}, {name: "lobby"}])
 
-types = Type.create([{name: "major"}, {name: "minor"}, {name: "all"}])
+types = Type.create([{name: "major"}, {name: "minor"}, {name: "all"}, {name: "floor maintenance"}, {name: "furniture maintenance"}])
 
-cleanings = Cleaning.create([{duty: "windows washed"}, {duty: "floors swept"}, {duty: "furniture dusted"}, {duty: "trash emptied"}, {duty: "supplies replenished"}])
+cleanings = Cleaning.create([{duty: "windows washed"}, {duty: "floors swept"}, {duty: "furniture dusted"}, {duty: "trash emptied"}, {duty: "supplies replenished"}, {duty: "floors mopped"}, {duty: "floors waxed"}, {duty: "furniture repaired"}])
 
 Assignment.create(type_id: types[2].id, cleaning_id: cleanings[0].id)
 Assignment.create(type_id: types[2].id, cleaning_id: cleanings[1].id)
 Assignment.create(type_id: types[2].id, cleaning_id: cleanings[2].id)
 Assignment.create(type_id: types[2].id, cleaning_id: cleanings[3].id)
 Assignment.create(type_id: types[2].id, cleaning_id: cleanings[4].id)
+Assignment.create(type_id: types[2].id, cleaning_id: cleanings[5].id)
+Assignment.create(type_id: types[2].id, cleaning_id: cleanings[6].id)
+Assignment.create(type_id: types[2].id, cleaning_id: cleanings[7].id)
 
 Assignment.create(type_id: types[1].id, cleaning_id: cleanings[0].id)
 Assignment.create(type_id: types[0].id, cleaning_id: cleanings[1].id)
 Assignment.create(type_id: types[0].id, cleaning_id: cleanings[2].id)
 Assignment.create(type_id: types[0].id, cleaning_id: cleanings[3].id)
 Assignment.create(type_id: types[0].id, cleaning_id: cleanings[4].id)
+
+Assignment.create(type_id: types[3].id, cleaning_id: cleanings[1].id)
+Assignment.create(type_id: types[3].id, cleaning_id: cleanings[5].id)
+Assignment.create(type_id: types[3].id, cleaning_id: cleanings[6].id)
+
+Assignment.create(type_id: types[4].id, cleaning_id: cleanings[2].id)
+Assignment.create(type_id: types[4].id, cleaning_id: cleanings[7].id)
+
 
 Schedule.create(user_id: users[0].id, type_id: types[2].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[0].id)
 Schedule.create(user_id: users[0].id, type_id: types[0].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[0].id)
@@ -56,6 +67,8 @@ Schedule.create(user_id: users[0].id, type_id: types[0].id, dated: Faker::Date.u
 Schedule.create(user_id: users[1].id, type_id: types[1].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: false, room_id: rooms[1].id)
 Schedule.create(user_id: users[3].id, type_id: types[2].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[2].id)
 
+Schedule.create(user_id: users[0].id, type_id: types[3].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[3].id)
+Schedule.create(user_id: users[3].id, type_id: types[4].id, dated: Faker::Date.unique.between(from: '2021-01-10', to: '2021-04-20'), original: true, room_id: rooms[0].id)
 
 
 ####################################### ORIGINAL BEGIN
